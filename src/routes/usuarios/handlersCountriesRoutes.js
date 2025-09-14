@@ -1,4 +1,4 @@
-const {registerUser,getAllUsers,getByDetail,getByprimerNombre,registerProfesional,allProfesionals,getProfesional,badUserDelete}=require("./controllersRoutes")
+const {registerUser,getAllUsers,getByDetail,getByprimerNombre,registerProfesional,allProfesionals,getProfesional,badUserDelete,getAllPacientes,postPaciente,getOnePaciente}=require("./controllersRoutes")
 
 // handlers usuariso generales
 const getUsuarios=async(req,res)=>{
@@ -92,7 +92,37 @@ const creatProfesional=async(req,res)=>{
         res.status(400).send({error:error.message});
     }
 }
+// handlers paciente
 
+const getAllPaciente=async (req,res)=>{
+    try {
+        const allPaciente= await getAllPacientes();
+        res.status(200).json(allPaciente)
+    } catch (error) {
+        res.status(400).send({error:error.message})
+    }
+
+}
+const geBytPaciente=async(req,res)=>{
+    const {id}=req.params;
+    try {
+        const onePaciente=await getOnePaciente(id);
+        res.status(200).json(onePaciente);
+    } catch (error) {
+        res.status(400).send({error:error.message})
+    }
+}
+const createPaciente=async(req,res)=>{
+
+    try {
+        const {histrialMedico,grupoSanguineo,peso,estatura,usuarioId}=req.body;
+        
+        const  createPacientes= await postPaciente(histrialMedico,grupoSanguineo,peso,estatura,usuarioId);
+        res.status(200).json(createPacientes);
+    } catch (error) {
+        res.status(400).send({error:error.message});
+    }
+}
 
 
 module.exports={
@@ -102,5 +132,8 @@ module.exports={
     creatProfesional,
     getAllProfesionals,
     getDetailProfesional,
-    deleteUser
+    deleteUser,
+    getAllPaciente,
+    createPaciente,
+    geBytPaciente
 }

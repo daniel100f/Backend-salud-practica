@@ -21,8 +21,12 @@ ProfesionalFunction(sequelize);
 PacienteFunction(sequelize)
 //modelos relacioness
 const {Usuario,Profesional,Paciente}=sequelize.models;
+//relacion uno a uno  
 Usuario.hasOne(Profesional, { foreignKey: 'usuarioId' });
 Profesional.belongsTo(Usuario, { foreignKey: 'usuarioId' });
+
+Usuario.hasOne(Paciente,{ foreignKey: 'usuarioId' });
+Paciente.belongsTo(Usuario,{foreignKey:'usuarioId'});
 
 
 

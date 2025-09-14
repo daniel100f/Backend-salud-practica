@@ -1,13 +1,23 @@
-const {Usuario,Profesional}=require("../../db")
+const {Usuario,Profesional,Paciente}=require("../../db")
 
 //controllers Users general
 const  getAllUsers=async()=>{
-    return await Usuario.findAll({include:{
-        model:Profesional,
-        attributes:{
-            exclude:["usuarioId"]
-        }
-    }});
+    return await Usuario.findAll({include:[
+            {
+                model: Profesional,
+                attributes: {
+                    
+                    exclude: ["usuarioId"] 
+                }
+            },
+            {
+                model: Paciente,
+                attributes: {
+                    
+                    exclude: ["usuarioId"] 
+                }
+            }
+        ]});
 }
 const getByprimerNombre=async(name)=>{
     return await Usuario.findAll({where:{primerNombre:name}})
@@ -17,12 +27,22 @@ const getByDetail = async(id)=>{
     if(id===null)
         throw Error("usuario no existe")
     
-    return await Usuario.findByPk(id,{include:{
-        model:Profesional,
-        attributes:{
-            exclude:["usuariosId"]
-        }
-    }});
+    return await Usuario.findByPk(id,{include:[
+            {
+                model: Profesional,
+                attributes: {
+                    
+                    exclude: ["usuarioId"] 
+                }
+            },
+            {
+                model: Paciente,
+                attributes: {
+                    
+                    exclude: ["usuarioId"] 
+                }
+            }
+        ]});
 }
 
 
@@ -57,15 +77,44 @@ const getProfesional=async(id)=>{
 
 const registerProfesional=async(licenciaProfesional,especialidad,bibliografia,usuarioId)=>{
 
-    if(!licenciaProfesional || ! especialidad || bibliografia )
+    if(!licenciaProfesional || ! especialidad || !bibliografia )
         throw Error("falta datos obligatorios")
      const newProfesional = await Profesional.create({ licenciaProfesional, especialidad, bibliografia,usuarioId });
     
    
     
-    ;
+    
     
     return newProfesional;
+}
+// controllers paciente
+const getAllPacientes=async()=>{
+    return await Paciente.findAll({include:{
+        model:Usuario,
+        attributes:{
+            exclude:["usuarioId"]
+        }
+    }});
+     
+}
+
+const getOnePaciente= async(id)=>{
+    return await Paciente.findByPk(id,{include:{
+        model:Usuario,
+        attributes:{
+            exclude:["usuarioId"]
+        }
+    }})
+}
+const postPaciente=async(histrialMedico,grupoSanguineo,peso,estatura,usuarioId)=>{
+    if(!histrialMedico || !grupoSanguineo || !peso || !estatura){
+        throw Error("faltan datos obligatorios");
+    }
+
+    const newPaciente=  await Paciente.create({histrialMedico,grupoSanguineo,peso,estatura,usuarioId});
+    
+    return newPaciente
+    
 }
 
 
@@ -78,7 +127,10 @@ const registerProfesional=async(licenciaProfesional,especialidad,bibliografia,us
         registerProfesional,
         allProfesionals,
         getProfesional,
-        badUserDelete
+        badUserDelete,
+        getAllPacientes,
+        postPaciente,
+        getOnePaciente
         
         
     }

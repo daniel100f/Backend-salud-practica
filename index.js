@@ -5,7 +5,7 @@ const PORT=3001;
 
 
 server.listen(PORT,()=>{
-    conn.sync({force:false});
+    conn.sync({alter:false});
     console.log(`Listening on port ${PORT}`)
     
 })
