@@ -90,6 +90,19 @@ const getProfesional=async(id)=>{
 
         }
     });
+};
+const profesionalActualizado = async(id,licenciaProfesional,especialidad,bibliografia)=>{
+    const profesional= await Profesional.findByPk(id);
+    if(!profesional){
+        throw Error("profesional no existe");
+    }
+    const profesionalModificado = await profesional.update({
+        licenciaProfesional,
+        especialidad,
+        bibliografia
+
+    });
+    return profesionalModificado;
 }
 
 const registerProfesional=async(licenciaProfesional,especialidad,bibliografia,usuarioId)=>{
@@ -134,6 +147,21 @@ const postPaciente=async(histrialMedico,grupoSanguineo,peso,estatura,usuarioId)=
     
 }
 
+const pacienteModificado=async(id,histrialMedico,grupoSanguineo,peso,estatura)=>{
+    const paciente = await Paciente.findByPk(id);
+    if(!paciente){
+        throw Error("no  existe paciente");
+    }
+    const newPaciente = await paciente.update({
+        histrialMedico,
+        grupoSanguineo,
+        peso,
+        estatura
+    });
+    return newPaciente;
+
+}
+
 
 
     module.exports={
@@ -148,7 +176,9 @@ const postPaciente=async(histrialMedico,grupoSanguineo,peso,estatura,usuarioId)=
         getAllPacientes,
         postPaciente,
         getOnePaciente,
-        getUpdateUsuario
+        getUpdateUsuario,
+        pacienteModificado,
+        profesionalActualizado
         
         
     }
