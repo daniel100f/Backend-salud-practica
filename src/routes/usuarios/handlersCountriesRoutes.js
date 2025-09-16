@@ -1,4 +1,4 @@
-const {registerUser,getAllUsers,getByDetail,getByprimerNombre,registerProfesional,allProfesionals,getProfesional,badUserDelete,getAllPacientes,postPaciente,getOnePaciente}=require("./controllersRoutes")
+const {registerUser,getAllUsers,getByDetail,getByprimerNombre,registerProfesional,allProfesionals,getProfesional,badUserDelete,getAllPacientes,postPaciente,getOnePaciente,getUpdateUsuario}=require("./controllersRoutes")
 
 // handlers usuariso generales
 const getUsuarios=async(req,res)=>{
@@ -46,6 +46,16 @@ const creatUsuarios=async(req,res)=>{
         res.status(400).send({error: error.message})
     }  
 };
+const updateUsuario = async(req,res)=>{
+    const {id}=req.params;
+    const {primerNombre,segundoNombre,primerApellido,segundoApellido,fechaNacimiento,ciudad,email,isActive}=req.body;
+    try {
+        const putUsuario= await getUpdateUsuario(id,primerNombre,segundoNombre,primerApellido,segundoApellido,fechaNacimiento,ciudad,email,isActive);
+        res.status(200).json(putUsuario);
+    } catch (error) {
+        res.status(400).send({error:error.message});
+    }
+}
 const deleteUser=async(req,res)=>{
     try {
         const {id}=req.params;
@@ -135,5 +145,6 @@ module.exports={
     deleteUser,
     getAllPaciente,
     createPaciente,
-    geBytPaciente
+    geBytPaciente,
+    updateUsuario
 }

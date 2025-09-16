@@ -1,5 +1,5 @@
 const {Router}=require("express");
-const {getDetailUser,getUsuarios,creatUsuarios,creatProfesional,getAllProfesionals,getDetailProfesional,deleteUser,getAllPaciente,createPaciente,geBytPaciente}=require("./handlersCountriesRoutes")
+const {getDetailUser,getUsuarios,creatUsuarios,creatProfesional,getAllProfesionals,getDetailProfesional,deleteUser,getAllPaciente,createPaciente,geBytPaciente,updateUsuario}=require("./handlersCountriesRoutes")
 
 const countrieRouter=Router();
 
@@ -18,6 +18,7 @@ countrieRouter.get("/:id",getDetailUser);
 countrieRouter.delete("/:id",deleteUser);
 countrieRouter.get("/profesionals/:id",getDetailProfesional);
 countrieRouter.get("/pacientes/:id",geBytPaciente);
+countrieRouter.put("/upDateUsuario/:id",updateUsuario)
 
 
 module.exports=countrieRouter;

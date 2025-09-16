@@ -60,7 +60,24 @@ const badUserDelete=async(id)=>{
         await usuario.destroy();
         return aux
 }
+const getUpdateUsuario=async(id,primerNombre,segundoNombre,primerApellido,segundoApellido,fechaNacimiento,ciudad, email,isActive)=>{
+    const  usuario = await Usuario.findByPk(id);
+    if(!usuario){
+        throw Error("Usuario no existe");
+    }
+    const usuarioActualizado = await usuario.update({
+        primerNombre,
+        segundoNombre,
+        primerApellido,
+        segundoApellido,
+        fechaNacimiento,
+        ciudad,
+        email,
+        isActive
+    });
+    return usuarioActualizado;
 
+}
 // controllers Profesional
 
 const allProfesionals=async()=>{
@@ -130,7 +147,8 @@ const postPaciente=async(histrialMedico,grupoSanguineo,peso,estatura,usuarioId)=
         badUserDelete,
         getAllPacientes,
         postPaciente,
-        getOnePaciente
+        getOnePaciente,
+        getUpdateUsuario
         
         
     }
