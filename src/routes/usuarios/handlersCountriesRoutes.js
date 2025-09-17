@@ -37,8 +37,9 @@ const getDetailUser=async(req,res)=>{
 const creatUsuarios=async(req,res)=>{
 
     try {
-        const {primerNombre,segundoNombre,primerApellido,segundoApellido,fechaNacimiento,ciudad,rol,email,isActive}=req.body;
-    const newUser =await registerUser(primerNombre,segundoNombre,primerApellido,segundoApellido,fechaNacimiento,ciudad,rol,email,isActive);
+        const {primerNombre,segundoNombre,primerApellido,segundoApellido,fechaNacimiento,ciudad,rol,email,isActive,contraseña}=req.body;
+        
+    const newUser =await registerUser(primerNombre,segundoNombre,primerApellido,segundoApellido,fechaNacimiento,ciudad,rol,email,isActive,contraseña);
    
     res.status(200).json(newUser);
         

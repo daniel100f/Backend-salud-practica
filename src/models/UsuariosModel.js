@@ -42,6 +42,11 @@ module.exports=(sequelize)=>{
         isActive:{
             type:DataTypes.BOOLEAN,
         defaultValue:true
+        },
+        contraseña:{
+         type:DataTypes.STRING,
+         allowNull:false,
+         unique:true
         }
        
 

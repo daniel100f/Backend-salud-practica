@@ -1,3 +1,5 @@
+const { where } = require("sequelize");
+const bcrypt = require("bcrypt")
 const {Usuario,Profesional,Paciente}=require("../../db")
 
 //controllers Users general
@@ -45,12 +47,38 @@ const getByDetail = async(id)=>{
         ]});
 }
 
+const checkEmailExists=async(email)=>{
+    const userEmail=await Usuario.findOne({where:{email:email}})
+    return userEmail;
 
-const  registerUser= async (primerNombre,segundoNombre,primerApellido,segundoApellido,fechaNacimiento,ciudad,rol,email,isActive)=>{
-    if(!primerNombre || !primerApellido || !fechaNacimiento || !rol ||!email){
-        throw  Error("faltan datos obligatorios")
+}
+const  registerUser= async (primerNombre,segundoNombre,primerApellido,segundoApellido,fechaNacimiento,ciudad,rol,email,isActive,contraseña)=>{
+    const emailExiste = await checkEmailExists(email);
+    
+
+    if(emailExiste){
+        throw Error(`usuario con el ${email} ya existe`)
     }
-        return await Usuario.create({primerNombre,segundoNombre,primerApellido,segundoApellido,fechaNacimiento,ciudad,rol,email,isActive});
+    //hashear la clave antes de guardarla
+    /* -primero generamos los saltos
+    -luego hasheamos la clave y le pasamos los saltos para que no se repitan */
+        const salt = await bcrypt.genSalt(10);
+        const contraseñaHasheada = await bcrypt.hash(contraseña,salt);
+
+        const user= await Usuario.create({
+            primerNombre,
+            segundoNombre,
+            primerApellido,
+            segundoApellido,
+            fechaNacimiento,
+            ciudad,
+            rol,
+            email,
+            isActive,
+            contraseña:contraseñaHasheada
+        });
+        
+        return user;
 };
 const badUserDelete=async(id)=>{
         

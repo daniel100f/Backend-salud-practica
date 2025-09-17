@@ -7,6 +7,9 @@ const countrieRouter=Router();
 // rutas de usaurios generales
 countrieRouter.get("/",getUsuarios);
 countrieRouter.post("/createdUser",creatUsuarios);
+//rutas usuarios generales jwt
+
+//countrieRouter.post("/logueo",logueo);
 // rutas de profesionales
 countrieRouter.get("/profesionals",getAllProfesionals)
 countrieRouter.post("/createdProfesional",creatProfesional);
