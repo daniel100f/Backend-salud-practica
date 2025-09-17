@@ -1,6 +1,9 @@
 const { where } = require("sequelize");
 const bcrypt = require("bcrypt")
+const jwt=require("jsonwebtoken")
 const {Usuario,Profesional,Paciente}=require("../../db")
+
+require("dotenv").config()
 
 //controllers Users general
 const  getAllUsers=async()=>{
@@ -77,8 +80,9 @@ const  registerUser= async (primerNombre,segundoNombre,primerApellido,segundoApe
             isActive,
             contraseña:contraseñaHasheada
         });
+        const token = jwt.sign({email:user.email},process.env.JWT_SECRET,{expiresIn:"2h"});
         
-        return user;
+        return token;
 };
 const badUserDelete=async(id)=>{
         

@@ -41,7 +41,7 @@ const creatUsuarios=async(req,res)=>{
         
     const newUser =await registerUser(primerNombre,segundoNombre,primerApellido,segundoApellido,fechaNacimiento,ciudad,rol,email,isActive,contraseña);
    
-    res.status(200).json(newUser);
+    res.status(200).json(newUser,"creado exitosamente");
         
     } catch (error) {
         res.status(400).send({error: error.message})
