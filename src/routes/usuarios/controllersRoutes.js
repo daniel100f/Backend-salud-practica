@@ -58,7 +58,9 @@ const checkEmailExists=async(email)=>{
 const  registerUser= async (primerNombre,segundoNombre,primerApellido,segundoApellido,fechaNacimiento,ciudad,rol,email,isActive,contraseña)=>{
     const emailExiste = await checkEmailExists(email);
     
-
+    if(!primerNombre || !primerApellido || !fechaNacimiento || !rol || !email || !contraseña ){
+        throw Error("faltan datos obligatorios");
+    }
     if(emailExiste){
         throw Error(`usuario con el ${email} ya existe`)
     }
