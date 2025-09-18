@@ -86,6 +86,25 @@ const  registerUser= async (primerNombre,segundoNombre,primerApellido,segundoApe
         
         return token;
 };
+const getAcessLogueo = async(email,contraseña)=>{
+    if(!email || !contraseña){
+        throw Error("faltan datos de acceso");
+    }
+    const user= await Usuario.findOne({where:{email:email}});
+    console.log(user)
+    if(!user){
+        throw Error(`no existe usuario con este correo ${user}`);
+    }
+
+    const isMatch = await bcrypt.compare(contraseña,user.contraseña);
+    if(!isMatch){
+        throw Error("no coinciden")
+    }
+    const token = jwt.sign({email:user.email},process.env.JWT_SECRET,{expiresIn:"2h"});
+    return token;
+
+
+}
 const badUserDelete=async(id)=>{
         
 
@@ -212,7 +231,8 @@ const pacienteModificado=async(id,histrialMedico,grupoSanguineo,peso,estatura)=>
         getOnePaciente,
         getUpdateUsuario,
         pacienteModificado,
-        profesionalActualizado
+        profesionalActualizado,
+        getAcessLogueo
         
         
     }
