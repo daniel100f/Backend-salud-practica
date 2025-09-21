@@ -32,6 +32,7 @@ module.exports=(sequelize)=>{
          },
         rol: {
         type: DataTypes.ENUM('administrador', 'paciente', 'profesional'), 
+        defaultValue:"paciente",
         allowNull: false
         },
         email:{
