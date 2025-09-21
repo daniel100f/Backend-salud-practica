@@ -1,5 +1,6 @@
 const {Router}=require("express");
-const {getDetailUser,getUsuarios,creatUsuarios,creatProfesional,getAllProfesionals,getDetailProfesional,deleteUser,getAllPaciente,createPaciente,geBytPaciente,updateUsuario,updatePaciente,updateProfesional,logueo}=require("./handlersCountriesRoutes")
+const {getDetailUser,getUsuarios,creatUsuarios,creatProfesional,getAllProfesionals,getDetailProfesional,deleteUser,getAllPaciente,createPaciente,geBytPaciente,updateUsuario,updatePaciente,updateProfesional,logueo,profile}=require("./handlersCountriesRoutes")
+const verifytoken=require("../../middleware/jwtMiddleware")
 
 const countrieRouter=Router();
 
@@ -8,7 +9,7 @@ const countrieRouter=Router();
 countrieRouter.get("/",getUsuarios);
 countrieRouter.post("/createdUser",creatUsuarios);
 //rutas usuarios generales jwt
-
+countrieRouter.get("/profile",verifytoken,profile)
 countrieRouter.post("/logueo",logueo);
 // rutas de profesionales
 countrieRouter.get("/profesionals",getAllProfesionals)

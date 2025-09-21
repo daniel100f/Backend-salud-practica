@@ -1,4 +1,4 @@
-const {registerUser,getAllUsers,getByDetail,getByprimerNombre,registerProfesional,allProfesionals,getProfesional,badUserDelete,getAllPacientes,postPaciente,getOnePaciente,getUpdateUsuario,pacienteModificado,profesionalActualizado,getAcessLogueo}=require("./controllersRoutes")
+const {registerUser,getAllUsers,getByDetail,getByprimerNombre,registerProfesional,allProfesionals,getProfesional,badUserDelete,getAllPacientes,postPaciente,getOnePaciente,getUpdateUsuario,pacienteModificado,profesionalActualizado,getAcessLogueo,getProfile}=require("./controllersRoutes")
 
 // handlers usuariso generales
 const getUsuarios=async(req,res)=>{
@@ -30,6 +30,17 @@ const logueo=async(req,res)=>{
     } catch (error) {
         res.status(400).send({error:error.message})
         
+    }
+
+}
+const profile=async(req,res)=>{
+    const {email}=req.email
+    try {
+        const perfil = await getProfile(email);
+        res.status(200).json(perfil);
+        
+    } catch (error) {
+        res.status(400).send({error:error.message})
     }
 
 }
@@ -183,5 +194,6 @@ module.exports={
     updateUsuario,
     updatePaciente,
     updateProfesional,
-    logueo
+    logueo,
+    profile
 }

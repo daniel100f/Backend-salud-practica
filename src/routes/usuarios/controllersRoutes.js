@@ -105,6 +105,11 @@ const getAcessLogueo = async(email,contraseña)=>{
 
 
 }
+const getProfile=async(email)=>{
+    const getPerfil = await Usuario.findOne({where:email});
+    return getPerfil
+
+}
 const badUserDelete=async(id)=>{
         
 
@@ -232,7 +237,8 @@ const pacienteModificado=async(id,histrialMedico,grupoSanguineo,peso,estatura)=>
         getUpdateUsuario,
         pacienteModificado,
         profesionalActualizado,
-        getAcessLogueo
+        getAcessLogueo,
+        getProfile
         
         
     }
