@@ -82,6 +82,7 @@ const  registerUser= async (primerNombre,segundoNombre,primerApellido,segundoApe
             isActive,
             contraseña:contraseñaHasheada
         });
+        // una vez hasheada la clave generamos el token
         const token = jwt.sign({email:user.email},process.env.JWT_SECRET,{expiresIn:"2h"});
         
         return token;
