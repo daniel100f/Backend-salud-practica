@@ -3,7 +3,7 @@ const {registerUser,getAllUsers,getByDetail,getByprimerNombre,registerProfesiona
 // handlers usuariso generales
 const getUsuarios=async(req,res)=>{
     const {name}=req.query;
-    console.log(req.query)
+    
 
     try {
         if(name){

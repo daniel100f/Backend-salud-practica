@@ -83,7 +83,7 @@ const  registerUser= async (primerNombre,segundoNombre,primerApellido,segundoApe
             contraseña:contraseñaHasheada
         });
         // una vez hasheada la clave generamos el token
-        const token = jwt.sign({email:user.email},process.env.JWT_SECRET,{expiresIn:"2h"});
+        const token = jwt.sign({email:user.email,role:user.rol},process.env.JWT_SECRET,{expiresIn:"2h"});
         
         return token;
 };
@@ -92,7 +92,7 @@ const getAcessLogueo = async(email,contraseña)=>{
         throw Error("faltan datos de acceso");
     }
     const user= await Usuario.findOne({where:{email:email}});
-    console.log(user)
+    
     if(!user){
         throw Error(`no existe usuario con este correo ${user}`);
     }
@@ -101,7 +101,7 @@ const getAcessLogueo = async(email,contraseña)=>{
     if(!isMatch){
         throw Error("no coinciden")
     }
-    const token = jwt.sign({email:user.email},process.env.JWT_SECRET,{expiresIn:"2h"});
+    const token = jwt.sign({email:user.email,role:user.rol},process.env.JWT_SECRET,{expiresIn:"2h"});
     return token;
 
 
