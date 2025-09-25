@@ -6,7 +6,7 @@ const countrieRouter=Router();
 
 
 // rutas de usaurios generales
-
+//ruta admin verifica rol
 countrieRouter.get("/",verifytoken,verifytokenAdmin,getUsuarios);
 countrieRouter.post("/createdUser",creatUsuarios);
 //rutas usuarios generales jwt
