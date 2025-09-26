@@ -1,6 +1,6 @@
 const {Router} = require("express");
 const usuariosRouter=require("./usuarios/usuariosRouter");
-const citasRouter=require("./citas/activitiesRouter")
+const citasRouter=require("./citas/citasRouter")
 
 const mainRouter=Router();
 

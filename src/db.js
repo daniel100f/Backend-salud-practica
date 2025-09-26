@@ -5,6 +5,7 @@ const UsuariosFunction=require("./models/UsuariosModel");
 const CitasFunction=require("./models/CitasModel");
 const ProfesionalFunction=require("./models/Profesional.Model");
 const PacienteFunction=require("./models/Paciente");
+const citaFuncion=require("./models/Paciente");
 
 const {DB_USER,DB_PASSWORD,DB_NAME,DB_PORT,DB_HOST }=process.env;
 
@@ -19,6 +20,7 @@ UsuariosFunction(sequelize);
 CitasFunction(sequelize);
 ProfesionalFunction(sequelize);
 PacienteFunction(sequelize)
+citaFuncion(sequelize)
 //modelos relacioness
 const {Usuario,Profesional,Paciente}=sequelize.models;
 //relacion uno a uno  
