@@ -1,10 +1,10 @@
 const {Router}=require("express");
-const {getAllActivities,postActivity}=require("./handlerCitas")
+const {getAllActivities,postCita}=require("./handlerCitas")
 
 
 const citasRouter=Router();
-citasRouter.get("/actividades",getAllActivities);
-citasRouter.post("/postActivities",postActivity);
+citasRouter.get("/",getAllActivities);
+citasRouter.post("/crearCitas",postCita);
 
 
 module.exports=citasRouter;
