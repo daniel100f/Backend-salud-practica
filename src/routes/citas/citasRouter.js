@@ -1,9 +1,9 @@
 const {Router}=require("express");
-const {getAllActivities,postCita}=require("./handlerCitas")
+const {getAllCitas,postCita}=require("./handlerCitas")
 
 
 const citasRouter=Router();
-citasRouter.get("/",getAllActivities);
+citasRouter.get("/",getAllCitas);
 citasRouter.post("/crearCitas",postCita);
 
 

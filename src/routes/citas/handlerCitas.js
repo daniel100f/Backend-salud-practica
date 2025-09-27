@@ -1,9 +1,14 @@
-const {crearCita} = require("./controllerCita");
+const {crearCita,allCitas} = require("./controllerCita");
 
-const  getAllActivities=(req,res)=>{
+const  getAllCitas= async(req,res)=>{
 
-    res.status(200).send("traigo todas las actividades creadas");
-}
+    try {
+        const todasCitas = await allCitas();
+        res.status(200).json(todasCitas);
+    } catch (error) {
+        res.status(400).json({error:error.message})
+    }
+};
 
 const postCita= async(req,res)=>{
     const {fecha,horaInicio,procedimiento,estado,notas}=req.body;
@@ -15,7 +20,7 @@ const postCita= async(req,res)=>{
     }
 }
 module.exports={
-    getAllActivities,
+    getAllCitas,
     postCita
     
 }
