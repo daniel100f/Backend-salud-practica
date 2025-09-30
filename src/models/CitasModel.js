@@ -6,21 +6,15 @@ module.exports=(sequelize)=>{
         defaultValue: DataTypes.UUIDV4,
         primaryKey:true
     },
-    fecha:{
-    type:DataTypes.DATEONLY,
-    allowNull:false,
-    },
-    horaInicio:{
-        type:DataTypes.TIME
-
-    },
+   
     procedimiento:{
         type:DataTypes.STRING,
         allowNull:false
 
     },
     estado: {
-        type:DataTypes.ENUM('agendada', 'confirmada', 'cancelada', 'completada')
+        type:DataTypes.ENUM('agendada', 'confirmada', 'cancelada', 'completada'),
+        defaultValue:"agendada"
     },
     notas:{
         type:DataTypes.TEXT,

@@ -11,9 +11,9 @@ const  getAllCitas= async(req,res)=>{
 };
 
 const postCita= async(req,res)=>{
-    const {fecha,horaInicio,procedimiento,estado,notas}=req.body;
+    const {fecha,procedimiento,estado,notas}=req.body;
     try {
-        const citaNueva = await crearCita(fecha,horaInicio,procedimiento,estado,notas);
+        const citaNueva = await crearCita(fecha,procedimiento,estado,notas);
         res.status(200).json(citaNueva);
     } catch (error) {
         res.status(400).json({error:error.message})

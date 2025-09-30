@@ -6,6 +6,7 @@ const CitasFunction=require("./models/CitasModel");
 const ProfesionalFunction=require("./models/Profesional.Model");
 const PacienteFunction=require("./models/Paciente");
 const citaFuncion=require("./models/Paciente");
+const  horarioFuncion = require("./models/Horario");
 
 const {DB_USER,DB_PASSWORD,DB_NAME,DB_PORT,DB_HOST }=process.env;
 
@@ -21,8 +22,9 @@ CitasFunction(sequelize);
 ProfesionalFunction(sequelize);
 PacienteFunction(sequelize)
 citaFuncion(sequelize)
+horarioFuncion(sequelize);
 //modelos relacioness
-const {Usuario,Profesional,Paciente}=sequelize.models;
+const {Usuario,Profesional,Paciente,Horario,Cita}=sequelize.models;
 //relacion uno a uno  
 Usuario.hasOne(Profesional, { foreignKey: 'usuarioId' });
 Profesional.belongsTo(Usuario, { foreignKey: 'usuarioId' });
@@ -30,11 +32,22 @@ Profesional.belongsTo(Usuario, { foreignKey: 'usuarioId' });
 Usuario.hasOne(Paciente,{ foreignKey: 'usuarioId' });
 Paciente.belongsTo(Usuario,{foreignKey:'usuarioId'});
 
+//relacion uno a muchos
 
+Profesional.hasMany(Cita, {
+  foreignKey: 'profesionalId',
+});
+Cita.belongsTo(Profesional,{
+    foreignKey:"profesionalId"
+});
+//---------------------------------
 
-/* Usuario.hasOne(Paciente, { foreignKey: 'usuarioId' });
-Paciente.belongsTo(Usuario, { foreignKey: 'usuarioId' }); */
-
+Profesional.hasMany(Horario,{
+    foreignKey:'profesionalId'
+});
+Horario.belongsTo(Profesional,{
+    foreignKey:"profesionalId"
+});
 
   
   
