@@ -18,6 +18,10 @@ module.exports = (sequelize)=>{
         horarioFin:{
             type:DataTypes.TIME,
             allownNull:false
+        },
+        fecha:{
+            type:DataTypes.DATE,
+            allownNull:false
         }
     })
 
