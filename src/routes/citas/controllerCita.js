@@ -5,10 +5,7 @@ const {Cita} = require("../../db")
 const allCitas = async()=>{
     return Cita.findAll();
 }
-/* const checkEstado=async(estado)=>{
-    const cita = await Cita.findOne({where:{estado:estado}})
-    return cita
-}  */
+
 const crearCita = async(procedimiento,estado,notas)=>{
  
     if(!procedimiento || !estado || !notas){
